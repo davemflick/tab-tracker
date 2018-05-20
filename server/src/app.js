@@ -11,10 +11,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/register', (req, res)=>{
-	console.log(req.params);
 	res.send({
-		message: 'Your user was registered. Have fun.',
-		request: req.params
+		message: `Your user ${req.body.email} was registered. Have fun.`
 	})
 });
 
