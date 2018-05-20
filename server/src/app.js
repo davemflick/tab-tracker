@@ -2,18 +2,20 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const morgan = require("morgan");
 const cors = require('cors');
+const config = require('./config/config');
+const {sequelize} = require('./models');
 
-//Build app server
 const app = express();
 
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post('/register', (req, res)=>{
-	res.send({
-		message: `Your user ${req.body.email} was registered. Have fun.`
-	})
-});
+require('./routes')(app); // pass in route to routes.js
 
-app.listen(process.env.PORT || 8081, ()=>console.log('Connected to express server'));
+
+sequelize.sync()
+	.then(()=>{
+		app.listen(config.port, ()=>console.log('Connected to express server'));
+	})
+
