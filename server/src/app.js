@@ -10,8 +10,12 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', (req, res)=>{
-	console.log("Index Get Route");
+app.post('/register', (req, res)=>{
+	console.log(req.params);
+	res.send({
+		message: 'Your user was registered. Have fun.',
+		request: req.params
+	})
 });
 
 app.listen(process.env.PORT || 8081, ()=>console.log('Connected to express server'));
