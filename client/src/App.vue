@@ -1,13 +1,24 @@
 <template>
   <div id="app">
-    <router-view/>
+    <v-app>
+      <app-header></app-header>
+      <v-content>
+        <v-container fluid>
+          <router-view/>
+        </v-container>
+      </v-content>
+    </v-app>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  import appHeader from './components/Header.vue';
+  export default {
+    name: 'App',
+    components: {
+      appHeader: appHeader
+    }
+  }
 </script>
 
 <style>
@@ -19,4 +30,6 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+
 </style>
