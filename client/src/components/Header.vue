@@ -10,14 +10,13 @@
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-
-      <v-btn flat dark @click="navigateTo({name: 'Register'})">
+      <v-btn flat dark @click="navigateTo({name: 'Register'})" v-if="!$store.state.isUserLoggedIn">
         Sign Up
       </v-btn>
-      <v-btn flat dark @click="navigateTo({name: 'Login'})">
+      <v-btn flat dark @click="navigateTo({name: 'Login'})" v-if="!$store.state.isUserLoggedIn">
         Login
       </v-btn>
-      <v-btn flat dark>
+      <v-btn flat dark v-if="$store.state.isUserLoggedIn">
         Logout
       </v-btn>
     </v-toolbar-items>
@@ -30,7 +29,7 @@
       navigateTo(route){
         this.$router.push(route);
       }
-    }
+    },
   }
 
 </script>
