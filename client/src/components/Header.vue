@@ -4,7 +4,7 @@
       TabTracker
     </v-toolbar-title>
     <v-toolbar-items>
-      <v-btn flat dark>
+      <v-btn flat dark @click="naviateTo({name: 'songs'})">
         Browse
       </v-btn>
     </v-toolbar-items>
@@ -16,8 +16,8 @@
       <v-btn flat dark @click="navigateTo({name: 'Login'})" v-if="!$store.state.isUserLoggedIn">
         Login
       </v-btn>
-      <v-btn flat dark v-if="$store.state.isUserLoggedIn">
-        Logout
+      <v-btn flat dark v-if="$store.state.isUserLoggedIn" @click="logout">
+        Log Out
       </v-btn>
     </v-toolbar-items>
   </v-toolbar>
@@ -28,14 +28,19 @@
     methods: {
       navigateTo(route){
         this.$router.push(route);
+      },
+      logout(){
+        this.$store.dispatch('setToken', null),
+        this.$store.dispatch('setUser', null)
+        this.$router.push({name: 'index'})
       }
-    },
+    }
   }
 
 </script>
 
 <style scoped>
-  .home{
-    cursor: pointer;
-  }
+.home{
+  cursor: pointer;
+}
 </style>
