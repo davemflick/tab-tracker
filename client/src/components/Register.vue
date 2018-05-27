@@ -1,27 +1,23 @@
 <template>
 	<v-layout row>
 		<v-flex xs6 offset-xs3>
-			<div class="white elevation-2">
-				<v-toolbar flat dense class="cyan" dark>
-					<v-toolbar-title>Register</v-toolbar-title>
-				</v-toolbar>
+			<panel title="Register">
 				<form class="pl-4 pr-4 pt-2 pb-2" autocomplete="off">
 					<v-text-field type="email" label="Email" required v-model="user.email"></v-text-field>
 					<v-text-field type="password" autocomplete="new-password"  label="Password" required v-model="user.password"></v-text-field>
 				</form>
-				<div class="pl-4 pr-4 pt-2 pb-2">
 					<br>
 					<div v-if="error" class="error">{{ error }}</div>
 					<br>
 					<v-btn dark class="cyan" @click="register">Register</v-btn>
-				</div>
-			</div>
+			</panel>
 		</v-flex>
 	</v-layout>
 </template>
 
 <script>
 	import AuthenticationService from '@/services/AuthenticationService';
+	import Panel from './Panel.vue';
 	export default{
 		data(){
 			return{
@@ -43,6 +39,9 @@
 				}
 
 			}
+		},
+		components:{
+			Panel
 		}
 	}
 </script>
