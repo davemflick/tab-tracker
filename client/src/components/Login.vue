@@ -7,7 +7,7 @@
 					<v-text-field type="password"  label="Password" required v-model="user.password"></v-text-field>
 				</form>
 				<br>
-				<div v-if="error" class="error">{{ error }}</div>
+				<div v-if="error" class="error-alert">{{ error }}</div>
 				<br>
 				<v-btn dark class="cyan" @click="login">Login</v-btn>
 			</panel>
@@ -34,6 +34,7 @@
 					const response = await AuthenticationService.login(this.user);
 					this.$store.dispatch('setToken', response.data.token);
 					this.$store.dispatch('setUser', response.data.user);
+					this.$router.push({name: 'songs'})
 				}catch(error){
 					this.error = error.response.data.error;
 				}
@@ -47,7 +48,8 @@
 </script>
 
 <style scoped>
-.error {
+.error-alert {
 	color: #ed2230;
+	background-color: transparent;
 }
 </style>

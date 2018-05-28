@@ -17,28 +17,40 @@
 						</div>
 						<br>
 						<v-btn dark class="cyan"
-							@click="navigateTo({
-								name: 'song-edit',
-								params: {
-									id: song.id
-								}
-							})">
-							Edit Song
-						</v-btn>
-					</v-flex>
-				</v-layout>
-			</panel>
-		</v-flex>
-		<v-flex xs12 md6 px-2 my-2>
-			<panel title="Lyrics">
-				<textarea readonly rows="23">{{ song.lyrics }}</textarea>
-			</panel>
-		</v-flex>
-		<v-flex xs12 px-2 my-2>
-			<panel title="Tabs">
-				<textarea readonly rows="50">{{ song.tab }}</textarea>
-			</panel>
-		</v-flex>
+						:to="{
+							name: 'song-edit',
+							params: {
+								id: song.id
+							}
+						}">
+						Edit Song
+					</v-btn>
+					<div>
+						<v-btn dark class="cyan"
+						v-if="$store.state.isUserLoggedIn"
+						@click="bookmark">
+						Bookmark
+					</v-btn>
+					<v-btn dark class="cyan"
+					v-if="$store.state.isUserLoggedIn"
+					@click="unbookmark">
+					UnBookmark
+					</v-btn>
+				</div>
+			</v-flex>
+		</v-layout>
+		</panel>
+	</v-flex>
+	<v-flex xs12 md6 px-2 my-2>
+		<panel title="Lyrics">
+			<textarea readonly rows="23">{{ song.lyrics }}</textarea>
+		</panel>
+	</v-flex>
+	<v-flex xs12 px-2 my-2>
+		<panel title="Tabs">
+			<textarea readonly rows="20">{{ song.tab }}</textarea>
+		</panel>
+	</v-flex>
 	</v-layout>
 </template>
 
@@ -56,13 +68,16 @@
 			const song = await SongService.show(songId);
 			this.song = song.data;
 		},
-		methods:{
-			navigateTo(route){
-        this.$router.push(route);
-      }
-		},
 		components:{
 			Panel
+		},
+		methods:{
+			bookmark(){
+				console.log("bookmark")
+			},
+			unbookmark(){
+				console.log('hi')
+			}
 		}
 	}
 </script>
