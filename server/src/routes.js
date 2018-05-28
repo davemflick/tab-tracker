@@ -15,4 +15,10 @@ module.exports = (app)=>{
 
 	app.post('/songs',
 		SongsController.post);
+
+	app.get('/song/:id',
+		SongsController.show);
+
+	app.put('/song/:id',
+		SongsController.put);
 }

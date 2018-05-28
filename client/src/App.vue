@@ -30,6 +30,25 @@
   color: #2c3e50;
   margin-top: 60px;
 }
+.song{
+  padding: 20px;
+  height: 330px;
+  overflow: hidden;
+}
+.song-title{
+  font-size: 28px;
+}
+.song-artist{
+  font-size: 24px;
+}
+.song-genre{
+  font-size: 18px;
+}
+.album-image{
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+}
 
 
 </style>
