@@ -1,17 +1,26 @@
-const {Bookmark} = require('../models');
+const {Bookmark, Song} = require('../models');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const _ = require('lodash');
 
 module.exports = {
 	async index(req,res){
 		try{
 			const {songid, userid} = req.query
-			const bookmark = await Bookmark.findOne({
-				where:{
-					SongId: songid,
-					UserId: userid
-				}
-			})
+			where = {
+				UserId: userid
+			}
+			if(songid){
+				where.SongId = songid;
+			}
+			const bookmark = await Bookmark.findAll({
+				where: where,
+				include: [
+					{
+						model: Song
+					}
+				]
+			}).map( bookmark=> bookmark.toJSON()).map(bookmark=> _.extend({bookmarkId: bookmark.id}, bookmark.Song))
 			res.send(bookmark);
 		} catch(err){
 			res.status(400).send({

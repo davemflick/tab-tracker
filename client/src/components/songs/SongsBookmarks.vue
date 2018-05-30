@@ -15,6 +15,8 @@
 
 <script>
   import Panel from '../Panel.vue';
+  import {mapState} from 'vuex';
+  import BookmarksService from '@/services/BookmarksService.js';
   export default{
     data(){
       return {
@@ -29,20 +31,23 @@
         }
         ],
         pagination: {sortBy: 'date', descending: true},
-        bookmarks: [
-        {
-          title: 'Farts',
-          artist: 'Testing'
-        },
-        {
-          title: 'Hello Wolrd2',
-          artist: 'Testing2'
-        }
-        ]
+        bookmarks: [ ]
       }
     },
+    computed:{
+      ...mapState([
+        'isUserLoggedIn',
+        'user'
+        ])
+    },
     async mounted(){
-
+      if(this.isUserLoggedIn){
+        const userId = this.user.id;
+        console.log(userId)
+        this.bookmarks = (await BookmarksService.index({
+          userid: userId
+        })).data
+      }
     },
     components:{
       Panel
