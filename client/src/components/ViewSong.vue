@@ -72,12 +72,13 @@
 
 			if(this.$store.state.isUserLoggedIn){
 				const userId = this.$store.state.user.id;
-				const bookmark = (await BookmarksService.index({
+				const bookmarks = (await BookmarksService.index({
 					songid: songId,
 					userid: userId
 				})).data
-				this.theBookmark = bookmark
-				console.log('bookmark', bookmark)
+				if(bookmarks.length){
+					this.theBookmark = bookmarks[0];
+				}
 			}
 		},
 		components:{

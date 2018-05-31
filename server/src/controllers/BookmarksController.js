@@ -20,7 +20,8 @@ module.exports = {
 						model: Song
 					}
 				]
-			}).map( bookmark=> bookmark.toJSON()).map(bookmark=> _.extend({bookmarkId: bookmark.id}, bookmark.Song))
+			}).map( bookmark=> bookmark.toJSON()).map(bookmark=>
+				 _.extend({}, bookmark.Song, bookmark))
 			res.send(bookmark);
 		} catch(err){
 			res.status(400).send({
@@ -67,4 +68,3 @@ module.exports = {
 		}
 	}
 }
-
