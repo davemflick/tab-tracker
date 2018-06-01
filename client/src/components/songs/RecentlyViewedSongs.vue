@@ -1,7 +1,7 @@
 <template>
   <panel title="Recently Viewed" my2>
     <v-data-table :headers="headers" :pagination.sync="pagination" :items="songs">
-      <template slot="items" scope="props">
+      <template slot="items" slot-scope="props">
         <td class="text-xs-right">
           {{props.item.title}}
         </td>
@@ -30,7 +30,7 @@
           value: 'artist'
         }
         ],
-        pagination: {sortBy: 'date', descending: true},
+        pagination: {sortBy: 'createdAt', descending: true},
         songs: [ ]
       }
     },
@@ -44,8 +44,8 @@
       if(this.isUserLoggedIn){
         const userId = this.user.id;
         console.log(userId)
-        this.bookmarks = (await SongHistoryService.index({
-          userid: userId
+        this.songs = (await SongHistoryService.index({
+          userId: userId
         })).data
       }
     },
