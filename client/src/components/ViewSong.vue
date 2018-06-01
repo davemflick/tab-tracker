@@ -58,12 +58,21 @@
 	import SongService from '@/services/SongService.js';
 	import BookmarksService from '@/services/BookmarksService.js';
 	import Panel from '@/components/Panel';
+	import SongHistoryService from '@/services/SongHistoryService.js';
+	import {mapState} from 'vuex';
+
 	export default{
 		data(){
 			return{
 				song: {},
 				theBookmark: null
 			}
+		},
+		computed:{
+			...mapState([
+				'isUserLoggedIn',
+				'user'
+				])
 		},
 		async mounted(){
 			const songId = this.$store.state.route.params.songId;
@@ -79,6 +88,16 @@
 				if(bookmarks.length){
 					this.theBookmark = bookmarks[0];
 				}
+			}
+
+			if(this.isUserLoggedIn){
+				console.log()
+				const historyPost = {
+					songId: songId,
+					userId: this.user.id
+				}
+				console.log(historyPost)
+				SongHistoryService.post(historyPost)
 			}
 		},
 		components:{
