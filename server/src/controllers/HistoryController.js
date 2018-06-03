@@ -19,7 +19,7 @@ module.exports = {
 				]
 			}).map( history=> history.toJSON()).map(history=>
 				 _.extend({}, history.Song, history))
-			res.send(history);
+			res.send(_.uniqBy(history, song=>song.SongId));
 		} catch(err){
 			res.status(400).send({
 				error: 'An error occured trying to fetch history'

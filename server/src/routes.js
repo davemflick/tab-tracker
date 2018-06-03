@@ -3,6 +3,7 @@ const AuthenticationControllerPolicy = require('./policies/AuthenticationControl
 const SongsController = require('./controllers/SongsController.js')
 const BookmarksController = require('./controllers/BookmarksController.js')
 const HistoryController = require('./controllers/HistoryController.js')
+const isAuthenticated = require('./policies/isAuthenticated.js')
 
 module.exports = (app)=>{
 	app.post('/register', 
@@ -25,6 +26,7 @@ module.exports = (app)=>{
 		SongsController.put);
 
 	app.get('/bookmarks',
+		//isAuthenticated, -Doesn't work, can't figure out why
 		BookmarksController.index)
 
 	app.post('/bookmarks',
