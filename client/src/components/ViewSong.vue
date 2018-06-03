@@ -78,7 +78,6 @@
 			const songId = this.$store.state.route.params.songId;
 			const song = await SongService.show(songId);
 			this.song = song.data;
-
 			if(this.$store.state.isUserLoggedIn){
 				const userId = this.$store.state.user.id;
 				const bookmarks = (await BookmarksService.index({
@@ -91,7 +90,6 @@
 			}
 
 			if(this.isUserLoggedIn){
-				console.log()
 				const historyPost = {
 					songId: songId,
 					userId: this.user.id
