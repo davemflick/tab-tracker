@@ -7,9 +7,11 @@ const {sequelize} = require('./models');
 
 const app = express();
 
-app.use(morgan('combined'));
+//app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
+
+require('./passport')
 
 require('./routes')(app); // pass in route to routes.js
 
